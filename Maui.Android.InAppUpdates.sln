@@ -1,0 +1,33 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32314.265
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{94FE90BF-FA05-46C6-A207-6E454A236659}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates", "src\Maui.Android.InAppUpdates.csproj", "{977FD131-640A-4840-B840-A7A911E0BC0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{977FD131-640A-4840-B840-A7A911E0BC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977FD131-640A-4840-B840-A7A911E0BC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977FD131-640A-4840-B840-A7A911E0BC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977FD131-640A-4840-B840-A7A911E0BC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1493AEE4-9211-46E9-BFE6-8F629EAC5693}
+	EndGlobalSection
+EndGlobal
