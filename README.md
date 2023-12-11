@@ -1,6 +1,6 @@
 # Maui.Android.InAppUpdates
-An example of implementing Android In-App Updates within a MAUI application with debugging capabilities.  
-Also available as a NuGet package if you don't need customization.
+Sample application and NuGet package that implementing Android In-App Updates 
+within a MAUI application with debugging capabilities.
 
 # Usage
 - Add NuGet package to your project:
