@@ -9,7 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates", "src\Maui.Android.InAppUpdates.csproj", "{977FD131-640A-4840-B840-A7A911E0BC0B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{928D4422-05CE-4AC2-89B0-31060889AE6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates", "src\libs\Maui.Android.InAppUpdates\Maui.Android.InAppUpdates.csproj", "{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{4746EB5B-E37C-40F0-8CA6-7D03185F5370}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates", "sample\Maui.Android.InAppUpdates.csproj", "{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,15 +23,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{977FD131-640A-4840-B840-A7A911E0BC0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{977FD131-640A-4840-B840-A7A911E0BC0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{977FD131-640A-4840-B840-A7A911E0BC0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{977FD131-640A-4840-B840-A7A911E0BC0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB} = {928D4422-05CE-4AC2-89B0-31060889AE6A}
+		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A} = {4746EB5B-E37C-40F0-8CA6-7D03185F5370}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1493AEE4-9211-46E9-BFE6-8F629EAC5693}
