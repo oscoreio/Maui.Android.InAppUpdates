@@ -13,6 +13,7 @@
   </PropertyGroup>
   
   <PropertyGroup Label="NuGet">
+    <PackageId>Oscore.$(AssemblyName)</PackageId>
     <Description>Sample application and NuGet package that implementing Android In-App Updates within a MAUI application with debugging capabilities</Description>
     <PackageTags>maui;android;in-app-updates;updates;in-app;net8;dotnet;csharp</PackageTags>
   </PropertyGroup>
