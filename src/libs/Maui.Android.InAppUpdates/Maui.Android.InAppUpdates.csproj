@@ -9,8 +9,7 @@
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseMaui>true</UseMaui>
-    <SignAssembly>false</SignAssembly>
-    <RootNamespace>Mvvm.Navigation.Maui</RootNamespace>
+    <NoWarn>$(NoWarn);CA1031;CA2000</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

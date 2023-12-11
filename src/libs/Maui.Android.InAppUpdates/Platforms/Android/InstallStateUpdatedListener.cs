@@ -7,7 +7,7 @@ using Object = Java.Lang.Object;
 using Toast = Android.Widget.Toast;
 using ToastLength = Android.Widget.ToastLength;
 
-namespace Maui.Android.InAppUpdates;
+namespace Maui.Android.InAppUpdates.Internal;
 
 /// <summary>
 /// Listener to track request state updates.
@@ -17,8 +17,15 @@ public class InstallStateUpdatedListener(
     IAppUpdateManager appUpdateManager)
     : Object, IInstallStateUpdatedListener
 {
+    /// <summary>
+    /// This method will be triggered when the app update status is changed.
+    /// </summary>
+    /// <param name="state"></param>
+    /// <exception cref="ArgumentNullException"></exception>
     public void OnStateUpdate(InstallState state)
     {
+        state = state ?? throw new ArgumentNullException(nameof(state));
+        
         try
         {
             switch (state.InstallStatus())
@@ -47,7 +54,12 @@ public class InstallStateUpdatedListener(
             System.Diagnostics.Debug.WriteLine($"Error occurred during in app update status change: {e}");
         }
     }
-
+    
+    /// <summary>
+    /// This method will show the alert dialog to complete the update.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="appUpdateManager"></param>
     public static void ShowAlertToCompleteUpdate(
         Context context,
         IAppUpdateManager appUpdateManager)

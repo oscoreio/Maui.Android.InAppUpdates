@@ -1,7 +1,19 @@
 # Maui.Android.InAppUpdates
-An example of implementing Android In-App Updates within a MAUI application with debugging capabilities
+An example of implementing Android In-App Updates within a MAUI application with debugging capabilities.  
+Also available as a NuGet package if you don't need customization.
 
-Links:
+# Usage
+- Add NuGet package to your project:
+```
+<PackageReference Include="Maui.Android.InAppUpdates" Version="1.0.0" />
+```
+- Add the following to your `MauiProgram.cs` `CreateMauiApp` method:
+```csharp
+builder
+   .UseAndroidInAppUpdates()
+```
+
+# Links
 - https://developer.android.com/guide/playcore/in-app-updates/kotlin-java
 - https://github.com/PatGet/XamarinPlayCoreUpdater
 - https://github.com/xamarin/GooglePlayServicesComponents/issues/796

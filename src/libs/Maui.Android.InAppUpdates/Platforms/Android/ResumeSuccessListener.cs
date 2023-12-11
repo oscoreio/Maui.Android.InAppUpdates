@@ -3,7 +3,7 @@ using Xamarin.Google.Android.Play.Core.AppUpdate;
 using Xamarin.Google.Android.Play.Core.Install.Model;
 using Xamarin.Google.Android.Play.Core.Tasks;
 
-namespace Maui.Android.InAppUpdates;
+namespace Maui.Android.InAppUpdates.Internal;
 
 /// <summary>
 /// Whenever the user brings your app to the foreground,

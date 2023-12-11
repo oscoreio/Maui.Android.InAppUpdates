@@ -6,7 +6,7 @@ using Xamarin.Google.Android.Play.Core.Install.Model;
 using Xamarin.Google.Android.Play.Core.Tasks;
 using Activity = Android.App.Activity;
 
-namespace Maui.Android.InAppUpdates;
+namespace Maui.Android.InAppUpdates.Internal;
 
 public class AppUpdateSuccessListener(
     IAppUpdateManager appUpdateManager,
@@ -34,7 +34,6 @@ public class AppUpdateSuccessListener(
                 _ = appUpdateManager.StartUpdateFlowForResult(
                     info, activity, AppUpdateOptions.DefaultOptions(AppUpdateType.Immediate), updateRequest);
 
-#if DEBUG
                 if (appUpdateManager is FakeAppUpdateManager { IsImmediateFlowVisible: true } fakeAppUpdate)
                 {
                     fakeAppUpdate.UserAcceptsUpdate();
@@ -53,7 +52,6 @@ public class AppUpdateSuccessListener(
                     });
                     alert?.Show();
                 }
-#endif
                 break;
             }
 
@@ -66,14 +64,12 @@ public class AppUpdateSuccessListener(
                 //    info, activity, AppUpdateOptions.DefaultOptions(AppUpdateType.Flexible), updateRequest);
                 _ = appUpdateManager.StartUpdateFlowForResult(info, AppUpdateType.Flexible, activity, updateRequest);
 
-#if DEBUG
                 if (appUpdateManager is FakeAppUpdateManager fakeAppUpdate)
                 {
                     fakeAppUpdate.UserAcceptsUpdate();
                     fakeAppUpdate.DownloadStarts();
                     fakeAppUpdate.DownloadCompletes();
                 }
-#endif
                 break;
             }
                 
