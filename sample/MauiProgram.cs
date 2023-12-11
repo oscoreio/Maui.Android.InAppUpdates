@@ -1,4 +1,6 @@
-﻿namespace Maui.Android.InAppUpdates;
+﻿using Microsoft.Extensions.Logging;
+
+namespace Maui.Android.InAppUpdates;
 
 public static class MauiProgram
 {

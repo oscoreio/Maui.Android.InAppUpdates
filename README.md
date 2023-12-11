@@ -4,13 +4,19 @@ Also available as a NuGet package if you don't need customization.
 
 # Usage
 - Add NuGet package to your project:
-```
+```xml
 <PackageReference Include="Maui.Android.InAppUpdates" Version="1.0.0" />
 ```
 - Add the following to your `MauiProgram.cs` `CreateMauiApp` method:
-```csharp
-builder
-   .UseAndroidInAppUpdates()
+```diff
+		builder
+			.UseMauiApp<App>()
++ 			.UseAndroidInAppUpdates()
+			.ConfigureFonts(fonts =>
+			{
+				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+			});
 ```
 
 # Links
