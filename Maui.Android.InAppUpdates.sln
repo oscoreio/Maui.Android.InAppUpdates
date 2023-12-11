@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{4746EB5B-E37C-40F0-8CA6-7D03185F5370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates", "sample\Maui.Android.InAppUpdates.csproj", "{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maui.Android.InAppUpdates.SampleApp", "sample\Maui.Android.InAppUpdates.SampleApp.csproj", "{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{8DEF204E-ED5E-45A8-B021-47F6588890F4}"
 	ProjectSection(SolutionItems) = preProject

@@ -1,22 +1,21 @@
 # Maui.Android.InAppUpdates
-Sample application and NuGet package that implementing Android In-App Updates 
-within a MAUI application with debugging capabilities.
+NuGet package that implementing Android In-App Updates for MAUI with debugging capabilities.
 
 # Usage
 - Add NuGet package to your project:
 ```xml
-<PackageReference Include="Maui.Android.InAppUpdates" Version="1.0.0" />
+<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.0.0" />
 ```
 - Add the following to your `MauiProgram.cs` `CreateMauiApp` method:
 ```diff
-		builder
-			.UseMauiApp<App>()
-+ 			.UseAndroidInAppUpdates()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+builder
+    .UseMauiApp<App>()
++   .UseAndroidInAppUpdates()
+    .ConfigureFonts(fonts =>
+    {
+        fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+        fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+    });
 ```
 
 # Links
