@@ -12,7 +12,7 @@ jobs:
     name: Build, test and publish
     runs-on: windows-latest
     steps:
-      - name: "Checkout"
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install workloads
@@ -28,11 +28,11 @@ jobs:
           Invoke-WebRequest 'https://raw.githubusercontent.com/Samsung/Tizen.NET/main/workload/scripts/workload-install.ps1' -OutFile 'workload-install.ps1'
           ./workload-install.ps1
         
-      - name: "Build"
+      - name: Build
         run: dotnet build src/libs/Maui.Android.InAppUpdates
           --configuration Release
 
-      - name: "Publish"
+      - name: Publish
         run: dotnet nuget push
           **.nupkg
           --skip-duplicate
