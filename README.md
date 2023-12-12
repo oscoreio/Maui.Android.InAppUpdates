@@ -1,4 +1,9 @@
 # Maui.Android.InAppUpdates
+
+[![Nuget package](https://img.shields.io/nuget/vpre/Oscore.Maui.Android.InAppUpdates)](https://www.nuget.org/packages/Oscore.Maui.Android.InAppUpdates/)
+[![CI/CD](https://github.com/oscoreio/Maui.Android.InAppUpdates/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/oscoreio/Maui.Android.InAppUpdates/actions/workflows/dotnet.yml)
+[![License: MIT](https://img.shields.io/github/license/oscoreio/Maui.Android.InAppUpdates)](https://github.com/oscoreio/Maui.Android.InAppUpdates/blob/main/LICENSE)
+
 NuGet package that implementing Android In-App Updates for MAUI with debugging capabilities.
 
 # Usage
