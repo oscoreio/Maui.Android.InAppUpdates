@@ -15,9 +15,9 @@ namespace Maui.Android.InAppUpdates.Internal;
 /// </summary>
 public static class UpdateEvents
 {
-    private const int RequestUpdate = 4711;
+    public const int RequestUpdate = 4711;
     
-    private static IAppUpdateManager? _appUpdateManager;
+    public static IAppUpdateManager? AppUpdateManager { get; private set; }
     
     /// <summary>
     /// Set this to true to use the fake app update manager.
@@ -43,15 +43,15 @@ public static class UpdateEvents
             If comment this line it will simulate if the app update is not available. Then you can add logic when update is not available using immeidate update*/
             updateManager.SetUpdateAvailable(3); // your higher app version code that can be used to test fakeappupdate manager
             updateManager.SetUpdatePriority(4);
-            _appUpdateManager = updateManager;
+            AppUpdateManager = updateManager;
         }
         else
         {
-            _appUpdateManager = AppUpdateManagerFactory.Create(activity);
+            AppUpdateManager = AppUpdateManagerFactory.Create(activity);
         }
         
-        _appUpdateManager.AppUpdateInfo.AddOnSuccessListener(new AppUpdateSuccessListener(
-            appUpdateManager: _appUpdateManager,
+        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(new AppUpdateSuccessListener(
+            appUpdateManager: AppUpdateManager,
             activity: activity,
             updateRequest: RequestUpdate,
             intent: activity.Intent));
@@ -63,9 +63,9 @@ public static class UpdateEvents
     /// <param name="activity"></param>
     public static void HandleResume(Activity activity)
     {
-        _appUpdateManager?.AppUpdateInfo.AddOnSuccessListener(new ResumeSuccessListener(
+        AppUpdateManager?.AppUpdateInfo.AddOnSuccessListener(new ResumeSuccessListener(
             context: activity,
-            appUpdateManager: _appUpdateManager));
+            appUpdateManager: AppUpdateManager));
     }
     
     /// <summary>
@@ -97,17 +97,17 @@ public static class UpdateEvents
                     break;
             }
         }
-        else // Here we add our custom code since immediate update will not return a callback result code
-        {
-            using var dialog = new AlertDialog.Builder(activity);
-            var alert = dialog.Create();
-            alert?.SetMessage("Hello Xamarin. Additional instructions");
-            alert?.SetCancelable(false);
-            alert?.SetButton((int)DialogButtonType.Positive, "Ok", (_, _) =>
-            {
-                alert.Dismiss();
-            });
-            alert?.Show();
-        }
+        // else // Here we add our custom code since immediate update will not return a callback result code
+        // {
+        //     using var dialog = new AlertDialog.Builder(activity);
+        //     var alert = dialog.Create();
+        //     alert?.SetMessage("Hello Xamarin. Additional instructions");
+        //     alert?.SetCancelable(false);
+        //     alert?.SetButton((int)DialogButtonType.Positive, "Ok", (_, _) =>
+        //     {
+        //         alert.Dismiss();
+        //     });
+        //     alert?.Show();
+        // }
     }
 }
