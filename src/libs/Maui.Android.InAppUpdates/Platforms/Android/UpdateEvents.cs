@@ -1,11 +1,9 @@
 ﻿using Android.App;
 using Android.Content;
 using Android.Runtime;
-using Android.Widget;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
 using Xamarin.Google.Android.Play.Core.AppUpdate.Testing;
 using Xamarin.Google.Android.Play.Core.Install.Model;
-using Toast = Android.Widget.Toast;
 using Bundle = Android.OS.Bundle;
 
 namespace Maui.Android.InAppUpdates.Internal;
@@ -75,39 +73,33 @@ public static class UpdateEvents
     /// <param name="requestCode"></param>
     /// <param name="resultCode"></param>
     /// <param name="data"></param>
-    public static void HandleActivityResult(Activity activity, int requestCode, [GeneratedEnum] Result resultCode, Intent? data)
+    public static void HandleActivityResult(
+        Activity activity,
+        int requestCode,
+        [GeneratedEnum] Result resultCode,
+        Intent? data)
     {
-        if (requestCode == RequestUpdate)
+        if (requestCode != RequestUpdate)
         {
-            switch (resultCode) // The switch block will be triggered only with flexible update since it returns the install result codes
-            {
-                case Result.Ok:
-                    // In app update success
-                    //if (AppUpdateTypeSupported == AppUpdateType.Immediate)
-                    {
-                        Toast.MakeText(activity, "App updated", ToastLength.Short)?.Show();
-                    }
-
-                    break;
-                case Result.Canceled:
-                    Toast.MakeText(activity, "In app update cancelled", ToastLength.Short)?.Show();
-                    break;
-                case (Result)ActivityResult.ResultInAppUpdateFailed:
-                    Toast.MakeText(activity, "In app update failed", ToastLength.Short)?.Show();
-                    break;
-            }
+            return;
         }
-        // else // Here we add our custom code since immediate update will not return a callback result code
-        // {
-        //     using var dialog = new AlertDialog.Builder(activity);
-        //     var alert = dialog.Create();
-        //     alert?.SetMessage("Hello Xamarin. Additional instructions");
-        //     alert?.SetCancelable(false);
-        //     alert?.SetButton((int)DialogButtonType.Positive, "Ok", (_, _) =>
-        //     {
-        //         alert.Dismiss();
-        //     });
-        //     alert?.Show();
-        // }
+        
+        // The switch block will be triggered only with flexible update since it returns the install result codes
+        switch (resultCode)
+        {
+            case Result.Ok:
+                // In app update success
+                //if (AppUpdateTypeSupported == AppUpdateType.Immediate)
+                DefaultUserInterface.ShowShortToast(activity, "App updated");
+                break;
+            
+            case Result.Canceled:
+                DefaultUserInterface.ShowShortToast(activity, "In app update cancelled");
+                break;
+            
+            case (Result)ActivityResult.ResultInAppUpdateFailed:
+                DefaultUserInterface.ShowShortToast(activity, "In app update failed");
+                break;
+        }
     }
 }
