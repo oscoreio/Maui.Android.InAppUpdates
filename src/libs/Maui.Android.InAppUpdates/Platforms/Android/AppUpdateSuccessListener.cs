@@ -45,9 +45,7 @@ public class AppUpdateSuccessListener(
             case UpdateAvailability.UpdateAvailable or UpdateAvailability.DeveloperTriggeredUpdateInProgress when
                 isFlexibleUpdatesAllowed:
             {
-                InstallStateUpdatedListener ??= new InstallStateUpdatedListener(
-                    context: activity,
-                    appUpdateManager: appUpdateManager);
+                InstallStateUpdatedListener ??= new InstallStateUpdatedListener();
                 appUpdateManager.RegisterListener(InstallStateUpdatedListener);
                 
                 _ = appUpdateManager.StartUpdateFlowForResult(

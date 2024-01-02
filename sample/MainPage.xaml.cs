@@ -84,9 +84,21 @@ public partial class MainPage : ContentPage
 	private void CompleteUpdate()
 	{
 #if ANDROID
-		Internal.Handler.Options.CompleteUpdateAction(
-			Platform.CurrentActivity!,
-			Internal.Handler.AppUpdateManager!);
+		Internal.Handler.Options.CompleteUpdateAction();
+#endif
+	}
+	
+	[RelayCommand]
+	private async Task Downloading()
+	{
+#if ANDROID
+		for (var i = 0; i < 100; i += 10)
+		{
+			Internal.Handler.Options.DownloadingAction(i);
+			await Task.Delay(TimeSpan.FromMilliseconds(250));
+		}
+#else
+		await Task.Delay(TimeSpan.FromMilliseconds(250));
 #endif
 	}
 	

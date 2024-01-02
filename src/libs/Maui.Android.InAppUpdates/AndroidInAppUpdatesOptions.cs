@@ -1,8 +1,3 @@
-#if ANDROID
-using Android.Content;
-using Xamarin.Google.Android.Play.Core.AppUpdate;
-#endif
-
 namespace Maui.Android.InAppUpdates;
 
 /// <summary>
@@ -32,36 +27,32 @@ public class AndroidInAppUpdatesOptions
     /// This action will be triggered when the app is updated. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
-    public Action<Context> AppUpdatedAction { get; set; } = static context =>
+    public Action AppUpdatedAction { get; set; } = static () =>
         Internal.DefaultUserInterface.ShowShortToast(
-            context: context,
             text: "App updated");
     
     /// <summary>
     /// This action will be triggered when the update is cancelled. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
-    public Action<Context> UpdateCancelledAction { get; set; } = static context =>
+    public Action UpdateCancelledAction { get; set; } = static () =>
         Internal.DefaultUserInterface.ShowShortToast(
-            context: context,
             text: "In app update cancelled");
     
     /// <summary>
     /// This action will be triggered when the update is failed. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
-    public Action<Context> UpdateFailedAction { get; set; } = static context =>
+    public Action UpdateFailedAction { get; set; } = static () =>
         Internal.DefaultUserInterface.ShowShortToast(
-            context: context,
             text: "In app update failed");
     
     /// <summary>
     /// This action will be triggered when the download is failed. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
-    public Action<Context> DownloadFailedAction { get; set; } = static context =>
+    public Action DownloadFailedAction { get; set; } = static () =>
         Internal.DefaultUserInterface.ShowShortToast(
-            context: context,
             text: "Update download failed.");
     
     /// <summary>
@@ -69,22 +60,19 @@ public class AndroidInAppUpdatesOptions
     /// Second value is the percentage of the download. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
-    public Action<Context, double> DownloadingAction { get; set; } = static (context, percents) =>
+    public Action<double> DownloadingAction { get; set; } = static percents =>
         Internal.DefaultUserInterface.ShowShortToast(
-            context: context,
             text: $"Downloaded {percents}%");
     
     /// <summary>
     /// This action will be triggered when the update is completed. <br/>
     /// Default action will show the alert dialog to complete the update. <br/>
     /// </summary>
-    public Action<Context, IAppUpdateManager> CompleteUpdateAction { get; set; } = static (context, appUpdateManager) =>
-        Internal.DefaultUserInterface.ShowAlertToCompleteUpdate(
-            context: context,
-            appUpdateManager: appUpdateManager,
-            title: "Download completed",
-            message: "Update is ready to be installed.", // "Application successfully updated! You need to restart the app in order to use this new features"
-            positiveButton: "Perform update"); // "Restart"
+    public Action CompleteUpdateAction { get; set; } = static () =>
+        Internal.DefaultUserInterface.ShowSnackbar(
+            text: "An update has just been downloaded.",
+            actionText: "RESTART",
+            clickHandler: static _ => Internal.Handler.AppUpdateManager?.CompleteUpdate());
 #endif
     
     /// <summary>

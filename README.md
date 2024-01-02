@@ -10,7 +10,7 @@ NuGet package that implementing Android In-App Updates for MAUI with debugging c
 # Usage
 - Add NuGet package to your project:
 ```xml
-<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="0.9.1" />
+<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.0.0" />
 ```
 - Add the following to your `MauiProgram.cs` `CreateMauiApp` method:
 ```diff

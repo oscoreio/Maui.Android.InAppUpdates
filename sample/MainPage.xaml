@@ -18,6 +18,7 @@
             <Button Command="{Binding InstallFailsCommand}" Text="InstallFails" />
             <Label Text="Test UI:" />
             <Button Command="{Binding CompleteUpdateCommand}" Text="CompleteUpdate" />
+            <Button Command="{Binding DownloadingCommand}" Text="Downloading" />
         </VerticalStackLayout>
     </ScrollView>
 

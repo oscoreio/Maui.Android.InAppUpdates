@@ -89,15 +89,15 @@ public static class Handler
         switch (resultCode)
         {
             case Result.Ok:
-                Options.AppUpdatedAction(activity);
+                Options.AppUpdatedAction();
                 break;
             
             case Result.Canceled:
-                Options.UpdateCancelledAction(activity);
+                Options.UpdateCancelledAction();
                 break;
             
             case (Result)ActivityResult.ResultInAppUpdateFailed:
-                Options.UpdateFailedAction(activity);
+                Options.UpdateFailedAction();
                 break;
         }
     }

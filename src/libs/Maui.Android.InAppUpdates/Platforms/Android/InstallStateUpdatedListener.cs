@@ -1,5 +1,3 @@
-using Android.Content;
-using Xamarin.Google.Android.Play.Core.AppUpdate;
 using Xamarin.Google.Android.Play.Core.Install;
 using Xamarin.Google.Android.Play.Core.Install.Model;
 using Object = Java.Lang.Object;
@@ -9,9 +7,7 @@ namespace Maui.Android.InAppUpdates.Internal;
 /// <summary>
 /// Listener to track request state updates.
 /// </summary>
-public class InstallStateUpdatedListener(
-    Context context,
-    IAppUpdateManager appUpdateManager)
+public class InstallStateUpdatedListener
     : Object, IInstallStateUpdatedListener
 {
     /// <summary>
@@ -43,16 +39,16 @@ public class InstallStateUpdatedListener(
                     var percents = Math.Round(
                         100.0 * bytesDownloaded / totalBytesToDownload);
                     
-                    Handler.Options.DownloadingAction(context, percents);
+                    Handler.Options.DownloadingAction(percents);
                     break;
                 }
             
                 case InstallStatus.Downloaded:
-                    Handler.Options.CompleteUpdateAction(context, appUpdateManager);
+                    Handler.Options.CompleteUpdateAction();
                     break;
                 
                 case InstallStatus.Failed:
-                    Handler.Options.DownloadFailedAction(context);
+                    Handler.Options.DownloadFailedAction();
                     break;
             }
         }
