@@ -35,7 +35,8 @@ public class InstallStateUpdatedListener(
                 case InstallStatus.Canceled:
                     break;
                 
-                case InstallStatus.Downloading:
+                case InstallStatus.Downloading
+                    when Handler.Options.ShowDownload:
                 {
                     var bytesDownloaded = state.BytesDownloaded();
                     var totalBytesToDownload = state.TotalBytesToDownload() + 1;
