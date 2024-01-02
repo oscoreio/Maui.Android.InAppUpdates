@@ -11,16 +11,19 @@ namespace Maui.Android.InAppUpdates.Internal;
 /// <summary>
 /// This class is responsible for handling the update events.
 /// </summary>
-public static class UpdateEvents
+public static class Handler
 {
     public const int RequestUpdate = 4711;
     
+    /// <summary>
+    /// The app update manager.
+    /// </summary>
     public static IAppUpdateManager? AppUpdateManager { get; private set; }
     
     /// <summary>
-    /// Set this to true to use the fake app update manager.
+    /// Options for the in-app updates.
     /// </summary>
-    public static bool DebugMode { get; set; }
+    public static AndroidInAppUpdatesOptions Options { get; set; } = new();
 
     /// <summary>
     /// This method will be triggered when the app is created.
@@ -32,15 +35,15 @@ public static class UpdateEvents
     {
         activity = activity ?? throw new ArgumentNullException(nameof(activity));
 
-        if (DebugMode)
+        if (Options.UseFakeAppUpdateManager)
         {
             var updateManager = new FakeAppUpdateManager(activity);
             /* The below line of code will trigger the fake app update manager which it will display the alert dialog
             Let say if we comment this line of code to simulate update is not available then the play core update not available flag
             will be captured on the appupdatesuccess listener.
             If comment this line it will simulate if the app update is not available. Then you can add logic when update is not available using immeidate update*/
-            updateManager.SetUpdateAvailable(3); // your higher app version code that can be used to test fakeappupdate manager
-            updateManager.SetUpdatePriority(4);
+            //updateManager.SetUpdateAvailable(3); // your higher app version code that can be used to test fakeappupdate manager
+            //updateManager.SetUpdatePriority(4);
             AppUpdateManager = updateManager;
         }
         else
@@ -90,15 +93,15 @@ public static class UpdateEvents
             case Result.Ok:
                 // In app update success
                 //if (AppUpdateTypeSupported == AppUpdateType.Immediate)
-                DefaultUserInterface.ShowShortToast(activity, "App updated");
+                Options.AppUpdatedAction(activity);
                 break;
             
             case Result.Canceled:
-                DefaultUserInterface.ShowShortToast(activity, "In app update cancelled");
+                Options.UpdateCancelledAction(activity);
                 break;
             
             case (Result)ActivityResult.ResultInAppUpdateFailed:
-                DefaultUserInterface.ShowShortToast(activity, "In app update failed");
+                Options.UpdateFailedAction(activity);
                 break;
         }
     }

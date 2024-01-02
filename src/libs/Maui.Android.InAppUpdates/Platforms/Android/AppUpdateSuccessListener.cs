@@ -21,12 +21,12 @@ public class AppUpdateSuccessListener(
             return;
         }
 
-        System.Diagnostics.Debug.WriteLine($"AVAILABLE VERSION CODE {info.AvailableVersionCode()}");
+        Handler.Options.DebugAction($"AVAILABLE VERSION CODE {info.AvailableVersionCode()}");
 
         switch (info.UpdateAvailability())
         {
             case UpdateAvailability.UpdateAvailable or UpdateAvailability.DeveloperTriggeredUpdateInProgress when
-                info.UpdatePriority() > 4 &&
+                info.UpdatePriority() >= Handler.Options.ImmediateUpdatePriority &&
                 info.IsUpdateTypeAllowed(AppUpdateType.Immediate):
             {
                 _ = appUpdateManager.StartUpdateFlowForResult(
@@ -41,7 +41,7 @@ public class AppUpdateSuccessListener(
                     fakeAppUpdate.DownloadStarts();
                     fakeAppUpdate.DownloadCompletes();
                     
-                    DefaultUserInterface.ShowAlertToCompleteUpdate(activity, appUpdateManager);
+                    Handler.Options.CompleteUpdateAction(activity, appUpdateManager);
                 }
                 break;
             }
@@ -70,7 +70,7 @@ public class AppUpdateSuccessListener(
                 
             case UpdateAvailability.UpdateNotAvailable:
             case UpdateAvailability.Unknown:
-                System.Diagnostics.Debug.WriteLine("UPDATE NOT AVAILABLE {VersionCode}", $"{info.AvailableVersionCode()}");
+                Handler.Options.DebugAction($"UPDATE NOT AVAILABLE {info.AvailableVersionCode()}");
                 // You can start your activityonresult method when update is not available
                 // when using immediate update
                 activity.StartActivityForResult(

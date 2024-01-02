@@ -28,7 +28,7 @@ public class ResumeSuccessListener(
 
         if (info.InstallStatus() == InstallStatus.Downloaded)
         {
-            DefaultUserInterface.ShowAlertToCompleteUpdate(context, appUpdateManager);
+            Handler.Options.CompleteUpdateAction(context, appUpdateManager);
         }
     }
 }

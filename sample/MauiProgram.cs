@@ -9,7 +9,12 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.UseAndroidInAppUpdates()
+			.UseAndroidInAppUpdates(static options =>
+			{
+#if DEBUG
+				options.UseFakeAppUpdateManager = true;
+#endif
+			})
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

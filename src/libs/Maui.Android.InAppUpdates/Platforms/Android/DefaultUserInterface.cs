@@ -14,21 +14,26 @@ public static class DefaultUserInterface
     /// <param name="appUpdateManager"></param>
     public static void ShowAlertToCompleteUpdate(
         Context context,
-        IAppUpdateManager appUpdateManager)
+        IAppUpdateManager appUpdateManager,
+        string title,
+        string message,
+        string positiveButton)
     {
-        var alert = new AlertDialog.Builder(context).Create();
-        alert?.SetTitle("Download completed");
-        // alert?.SetMessage("Application successfully updated! You need to restart the app in order to use this new features");
-        // alert?.SetButton((int)DialogButtonType.Positive, "Restart",
-        alert?.SetMessage("Update is ready to be installed.");
-        alert?.SetButton((int) DialogButtonType.Positive, "Perform update", (_, _) =>
+        if (new AlertDialog.Builder(context).Create() is not {} alert)
+        {
+            return;
+        }
+        
+        alert.SetTitle(title);
+        alert.SetMessage(message);
+        alert.SetButton((int) DialogButtonType.Positive, positiveButton, (_, _) =>
         {
             appUpdateManager.CompleteUpdate();
             // You can start your activityonresult method when update is not available when using immediate update when testing with fakeappupdate manager
             //activity.StartActivityForResult(intent, 400);
         });
-        alert?.SetCancelable(false);
-        alert?.Show();
+        alert.SetCancelable(false);
+        alert.Show();
     }
 
     public static void ShowShortToast(Context context, string text)

@@ -12,14 +12,16 @@ public static class MauiAppBuilderExtensions
     /// Set debugMode to true to enable the fake app update manager.
     /// </summary>
     /// <param name="builder"></param>
-    /// <param name="debugMode"></param>
+    /// <param name="setupAction"></param>
     /// <returns></returns>
     public static MauiAppBuilder UseAndroidInAppUpdates(
         this MauiAppBuilder builder,
-        bool debugMode = false)
+        Action<AndroidInAppUpdatesOptions>? setupAction = null) 
     {
+        builder = builder ?? throw new ArgumentNullException(nameof(builder));
+        
 #if ANDROID
-        Internal.UpdateEvents.DebugMode = debugMode;
+        setupAction?.Invoke(Internal.Handler.Options);
 #endif
         
         return builder
@@ -29,9 +31,9 @@ public static class MauiAppBuilderExtensions
                 events.AddAndroid(static android =>
                 {
                     android
-                        .OnActivityResult(Internal.UpdateEvents.HandleActivityResult)
-                        .OnCreate(Internal.UpdateEvents.HandleCreate)
-                        .OnResume(Internal.UpdateEvents.HandleResume)
+                        .OnActivityResult(Internal.Handler.HandleActivityResult)
+                        .OnCreate(Internal.Handler.HandleCreate)
+                        .OnResume(Internal.Handler.HandleResume)
                         ;
                 });
 #endif

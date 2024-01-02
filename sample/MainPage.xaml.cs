@@ -1,24 +1,26 @@
-﻿namespace Maui.Android.InAppUpdates;
+﻿using CommunityToolkit.Mvvm.Input;
+using Maui.Android.InAppUpdates.Internal;
+
+namespace Maui.Android.InAppUpdates;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
-
 	public MainPage()
 	{
 		InitializeComponent();
+		BindingContext = this;
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	[RelayCommand]
+	private void SetUpdateAvailableWithPriorityOf5()
 	{
-		count++;
+		DebugHelpers.SetUpdateAvailable(availableVersionCode: 2, priority: 5);
+	}
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
+	[RelayCommand]
+	private void SetUpdateAvailableWithPriorityOf3()
+	{
+		DebugHelpers.SetUpdateAvailable(availableVersionCode: 2, priority: 3);
 	}
 }
 

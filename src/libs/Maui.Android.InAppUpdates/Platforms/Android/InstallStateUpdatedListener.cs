@@ -29,26 +29,24 @@ public class InstallStateUpdatedListener(
             {
                 case InstallStatus.Downloading:
                 {
-                    var bytesDownloaded = state.BytesDownloaded();
-                    var totalBytesToDownload = state.TotalBytesToDownload();
-            
-                    var completed = Math.Round(100.0 * bytesDownloaded / totalBytesToDownload);
-                    DefaultUserInterface.ShowShortToast(context, $"Downloaded {completed}%");
+                    var percents = Math.Round(
+                        100.0 * state.BytesDownloaded() / state.TotalBytesToDownload());
+                    Handler.Options.DownloadingAction(context, percents);
                     break;
                 }
             
                 case InstallStatus.Downloaded:
-                    DefaultUserInterface.ShowAlertToCompleteUpdate(context, appUpdateManager);
+                    Handler.Options.CompleteUpdateAction(context, appUpdateManager);
                     break;
                 
                 case InstallStatus.Failed:
-                    DefaultUserInterface.ShowShortToast(context, "Update download failed.");
+                    Handler.Options.DownloadFailedAction(context);
                     break;
             }
         }
         catch (Exception e)
         {
-            System.Diagnostics.Debug.WriteLine($"Error occurred during in app update status change: {e}");
+            Handler.Options.DebugAction($"Error occurred during in app update status change: {e}");
         }
     }
 }
