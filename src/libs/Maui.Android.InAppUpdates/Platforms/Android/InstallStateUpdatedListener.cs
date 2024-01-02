@@ -25,12 +25,23 @@ public class InstallStateUpdatedListener(
         
         try
         {
-            switch (state.InstallStatus())
+            var installStatus = state.InstallStatus();
+            switch (installStatus)
             {
+                case InstallStatus.Unknown:
+                case InstallStatus.Pending:
+                case InstallStatus.Installing:
+                case InstallStatus.Installed:
+                case InstallStatus.Canceled:
+                    break;
+                
                 case InstallStatus.Downloading:
                 {
+                    var bytesDownloaded = state.BytesDownloaded();
+                    var totalBytesToDownload = state.TotalBytesToDownload() + 1;
                     var percents = Math.Round(
-                        100.0 * state.BytesDownloaded() / state.TotalBytesToDownload());
+                        100.0 * bytesDownloaded / totalBytesToDownload);
+                    
                     Handler.Options.DownloadingAction(context, percents);
                     break;
                 }
