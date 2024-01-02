@@ -1,4 +1,4 @@
-using Android.Content;
+using Android.App;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
 using Xamarin.Google.Android.Play.Core.Install.Model;
 using Xamarin.Google.Android.Play.Core.Tasks;
@@ -12,11 +12,13 @@ namespace Maui.Android.InAppUpdates.Internal;
 /// Otherwise, the update data continues to occupy the user's device storage. <br/>
 /// According: https://developer.android.com/guide/playcore/in-app-updates/kotlin-java#install-flexible
 /// </summary>
-/// <param name="context"></param>
 /// <param name="appUpdateManager"></param>
+/// <param name="activity"></param>
+/// <param name="updateRequest"></param>
 public class ResumeSuccessListener(
-    Context context,
-    IAppUpdateManager appUpdateManager)
+    IAppUpdateManager appUpdateManager,
+    Activity activity,
+    int updateRequest)
     : Java.Lang.Object, IOnSuccessListener
 {
     public void OnSuccess(Java.Lang.Object p0)
@@ -25,10 +27,22 @@ public class ResumeSuccessListener(
         {
             return;
         }
-
+        
+        // https://developer.android.com/guide/playcore/in-app-updates/kotlin-java#install-flexible
+        // If the update is downloaded but not installed,
+        // notify the user to complete the update.
         if (info.InstallStatus() == InstallStatus.Downloaded)
         {
-            Handler.Options.CompleteUpdateAction(context, appUpdateManager);
+            Handler.Options.CompleteUpdateAction();
+        }
+        // https://developer.android.com/guide/playcore/in-app-updates/kotlin-java#immediate
+        else if (info.UpdateAvailability() == UpdateAvailability.DeveloperTriggeredUpdateInProgress) {
+            // If an in-app update is already running, resume the update.
+            _ = appUpdateManager.StartUpdateFlowForResult(
+                info,
+                AppUpdateType.Immediate,
+                activity,
+                updateRequest);
         }
     }
 }

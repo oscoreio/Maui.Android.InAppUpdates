@@ -61,8 +61,9 @@ public static class Handler
         }
         
         ResumeSuccessListener ??= new ResumeSuccessListener(
-            context: activity,
-            appUpdateManager: AppUpdateManager);
+            appUpdateManager: AppUpdateManager,
+            activity: activity,
+            updateRequest: RequestUpdate);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(ResumeSuccessListener);
     }
     
