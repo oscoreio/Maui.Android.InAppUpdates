@@ -1,6 +1,5 @@
 using Android.Content;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
-using Xamarin.Google.Android.Play.Core.AppUpdate.Testing;
 using Xamarin.Google.Android.Play.Core.Install.Model;
 using Xamarin.Google.Android.Play.Core.Tasks;
 using Activity = Android.App.Activity;
@@ -14,6 +13,8 @@ public class AppUpdateSuccessListener(
     Intent? intent)
     : Java.Lang.Object, IOnSuccessListener
 {
+    public InstallStateUpdatedListener? InstallStateUpdatedListener { get; private set; }
+    
     public void OnSuccess(Java.Lang.Object p0)
     {
         if (p0 is not AppUpdateInfo info)
@@ -23,48 +24,37 @@ public class AppUpdateSuccessListener(
 
         Handler.Options.DebugAction($"AVAILABLE VERSION CODE {info.AvailableVersionCode()}");
 
-        switch (info.UpdateAvailability())
+        var updateAvailability = info.UpdateAvailability();
+        var updatePriority = info.UpdatePriority();
+        var isImmediateUpdatesAllowed = info.IsUpdateTypeAllowed(AppUpdateType.Immediate);
+        var isFlexibleUpdatesAllowed = info.IsUpdateTypeAllowed(AppUpdateType.Flexible);
+        switch (updateAvailability)
         {
             case UpdateAvailability.UpdateAvailable or UpdateAvailability.DeveloperTriggeredUpdateInProgress when
-                info.UpdatePriority() >= Handler.Options.ImmediateUpdatePriority &&
-                info.IsUpdateTypeAllowed(AppUpdateType.Immediate):
+                updatePriority >= Handler.Options.ImmediateUpdatePriority &&
+                isImmediateUpdatesAllowed:
             {
                 _ = appUpdateManager.StartUpdateFlowForResult(
                     info,
                     AppUpdateType.Immediate,
                     activity,
                     updateRequest);
-                
-                if (appUpdateManager is FakeAppUpdateManager { IsImmediateFlowVisible: true } fakeAppUpdate)
-                {
-                    fakeAppUpdate.UserAcceptsUpdate();
-                    fakeAppUpdate.DownloadStarts();
-                    fakeAppUpdate.DownloadCompletes();
-                    
-                    Handler.Options.CompleteUpdateAction(activity, appUpdateManager);
-                }
                 break;
             }
 
             case UpdateAvailability.UpdateAvailable or UpdateAvailability.DeveloperTriggeredUpdateInProgress when
-                info.IsUpdateTypeAllowed(AppUpdateType.Flexible):
+                isFlexibleUpdatesAllowed:
             {
-                appUpdateManager.RegisterListener(new InstallStateUpdatedListener(
+                InstallStateUpdatedListener ??= new InstallStateUpdatedListener(
                     context: activity,
-                    appUpdateManager: appUpdateManager));
+                    appUpdateManager: appUpdateManager);
+                appUpdateManager.RegisterListener(InstallStateUpdatedListener);
                 
                 _ = appUpdateManager.StartUpdateFlowForResult(
                     info,
                     AppUpdateType.Flexible,
                     activity,
                     updateRequest);
-
-                if (appUpdateManager is FakeAppUpdateManager fakeAppUpdate)
-                {
-                    fakeAppUpdate.UserAcceptsUpdate();
-                    fakeAppUpdate.DownloadStarts();
-                    fakeAppUpdate.DownloadCompletes();
-                }
                 break;
             }
                 

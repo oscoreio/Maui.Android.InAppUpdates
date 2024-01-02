@@ -1,10 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Maui.Android.InAppUpdates.Internal;
+#if ANDROID
+using Xamarin.Google.Android.Play.Core.AppUpdate.Testing;
+#endif
 
 namespace Maui.Android.InAppUpdates;
 
 public partial class MainPage : ContentPage
 {
+#if ANDROID
+	private int _availableVersionCode = 2;
+#endif
+	
 	public MainPage()
 	{
 		InitializeComponent();
@@ -14,13 +20,84 @@ public partial class MainPage : ContentPage
 	[RelayCommand]
 	private void SetUpdateAvailableWithPriorityOf5()
 	{
-		DebugHelpers.SetUpdateAvailable(availableVersionCode: 2, priority: 5);
+#if ANDROID
+		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 5);
+		FakeAppUpdateManager.SetUpdateAvailable(availableVersionCode: _availableVersionCode++);
+		AddOnSuccessListener();
+#endif
 	}
 
 	[RelayCommand]
 	private void SetUpdateAvailableWithPriorityOf3()
 	{
-		DebugHelpers.SetUpdateAvailable(availableVersionCode: 2, priority: 3);
+#if ANDROID
+		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 3);
+		FakeAppUpdateManager.SetUpdateAvailable(availableVersionCode: _availableVersionCode++);
+		AddOnSuccessListener();
+#endif
 	}
+	
+	[RelayCommand]
+	private void UserAcceptsUpdate()
+	{
+#if ANDROID
+		FakeAppUpdateManager.UserAcceptsUpdate();
+#endif
+	}
+	
+	[RelayCommand]
+	private void DownloadStarts()
+	{
+#if ANDROID
+		FakeAppUpdateManager.SetBytesDownloaded(0);
+		FakeAppUpdateManager.SetTotalBytesToDownload(10_000_000);
+		FakeAppUpdateManager.DownloadStarts();
+#endif
+	}
+	
+	[RelayCommand]
+	private void DownloadCompletes()
+	{
+#if ANDROID
+		FakeAppUpdateManager.SetBytesDownloaded(10_000_000);
+		FakeAppUpdateManager.DownloadCompletes();
+#endif
+	}
+	
+	[RelayCommand]
+	private void InstallCompletes()
+	{
+#if ANDROID
+		FakeAppUpdateManager.InstallCompletes();
+#endif
+	}
+	
+	[RelayCommand]
+	private void InstallFails()
+	{
+#if ANDROID
+		FakeAppUpdateManager.InstallFails();
+#endif
+	}
+	
+	[RelayCommand]
+	private void CompleteUpdate()
+	{
+#if ANDROID
+		Internal.Handler.Options.CompleteUpdateAction(
+			Platform.CurrentActivity!,
+			Internal.Handler.AppUpdateManager!);
+#endif
+	}
+	
+#if ANDROID
+	private static FakeAppUpdateManager FakeAppUpdateManager =>
+		(Internal.Handler.AppUpdateManager as FakeAppUpdateManager)!;
+	
+	private static void AddOnSuccessListener()
+	{
+		FakeAppUpdateManager.AppUpdateInfo.AddOnSuccessListener(Internal.Handler.AppUpdateSuccessListener!);
+	}
+#endif
 }
 

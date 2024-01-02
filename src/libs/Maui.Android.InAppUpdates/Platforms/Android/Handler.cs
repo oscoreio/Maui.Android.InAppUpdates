@@ -20,6 +20,9 @@ public static class Handler
     /// </summary>
     public static IAppUpdateManager? AppUpdateManager { get; private set; }
     
+    public static AppUpdateSuccessListener? AppUpdateSuccessListener { get; private set; }
+    public static ResumeSuccessListener? ResumeSuccessListener { get; private set; }
+    
     /// <summary>
     /// Options for the in-app updates.
     /// </summary>
@@ -35,27 +38,15 @@ public static class Handler
     {
         activity = activity ?? throw new ArgumentNullException(nameof(activity));
 
-        if (Options.UseFakeAppUpdateManager)
-        {
-            var updateManager = new FakeAppUpdateManager(activity);
-            /* The below line of code will trigger the fake app update manager which it will display the alert dialog
-            Let say if we comment this line of code to simulate update is not available then the play core update not available flag
-            will be captured on the appupdatesuccess listener.
-            If comment this line it will simulate if the app update is not available. Then you can add logic when update is not available using immeidate update*/
-            //updateManager.SetUpdateAvailable(3); // your higher app version code that can be used to test fakeappupdate manager
-            //updateManager.SetUpdatePriority(4);
-            AppUpdateManager = updateManager;
-        }
-        else
-        {
-            AppUpdateManager = AppUpdateManagerFactory.Create(activity);
-        }
-        
-        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(new AppUpdateSuccessListener(
+        AppUpdateManager = Options.UseFakeAppUpdateManager
+            ? new FakeAppUpdateManager(activity)
+            : AppUpdateManagerFactory.Create(activity);
+        AppUpdateSuccessListener ??= new AppUpdateSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
             updateRequest: RequestUpdate,
-            intent: activity.Intent));
+            intent: activity.Intent);
+        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(AppUpdateSuccessListener);
     }
     
     /// <summary>
@@ -64,9 +55,15 @@ public static class Handler
     /// <param name="activity"></param>
     public static void HandleResume(Activity activity)
     {
-        AppUpdateManager?.AppUpdateInfo.AddOnSuccessListener(new ResumeSuccessListener(
+        if (AppUpdateManager is null)
+        {
+            return;
+        }
+        
+        ResumeSuccessListener ??= new ResumeSuccessListener(
             context: activity,
-            appUpdateManager: AppUpdateManager));
+            appUpdateManager: AppUpdateManager);
+        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(ResumeSuccessListener);
     }
     
     /// <summary>
@@ -91,8 +88,6 @@ public static class Handler
         switch (resultCode)
         {
             case Result.Ok:
-                // In app update success
-                //if (AppUpdateTypeSupported == AppUpdateType.Immediate)
                 Options.AppUpdatedAction(activity);
                 break;
             
