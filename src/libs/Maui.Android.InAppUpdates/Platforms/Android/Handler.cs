@@ -45,8 +45,7 @@ public static class Handler
         AppUpdateSuccessListener ??= new AppUpdateSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
-            updateRequest: RequestUpdate,
-            intent: activity.Intent);
+            updateRequest: RequestUpdate);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(AppUpdateSuccessListener);
     }
     
