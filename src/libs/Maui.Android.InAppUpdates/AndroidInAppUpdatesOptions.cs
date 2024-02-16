@@ -9,7 +9,7 @@ public class AndroidInAppUpdatesOptions
     /// Show the download progress. <br/>
     /// Default is true. <br/>
     /// </summary>
-    public bool ShowDownload { get; set; } = true;
+    public bool ShowDownload { get; set; }
     
     /// <summary>
     /// Sets the priority of the update for immediate updates. <br/>
