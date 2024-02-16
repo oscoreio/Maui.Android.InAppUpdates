@@ -43,7 +43,7 @@ public static class Handler
         AppUpdateSuccessListener ??= new AppUpdateSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
-            updateRequest: Options.UpdateRequestId);
+            updateRequest: Options.RequestCode);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(AppUpdateSuccessListener);
     }
     
@@ -61,7 +61,7 @@ public static class Handler
         ResumeSuccessListener ??= new ResumeSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
-            updateRequest: Options.UpdateRequestId);
+            updateRequest: Options.RequestCode);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(ResumeSuccessListener);
     }
     
@@ -78,7 +78,7 @@ public static class Handler
         [GeneratedEnum] Result resultCode,
         Intent? data)
     {
-        if (requestCode != Options.UpdateRequestId)
+        if (requestCode != Options.RequestCode)
         {
             return;
         }

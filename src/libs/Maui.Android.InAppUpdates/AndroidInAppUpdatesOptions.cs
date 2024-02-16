@@ -6,8 +6,13 @@ namespace Maui.Android.InAppUpdates;
 public class AndroidInAppUpdatesOptions
 {
     /// <summary>
+    /// This value is used to differentiate between multiple update or request processes within your app.
+    /// </summary>
+    public const int DefaultRequestCode = 4711;
+    
+    /// <summary>
     /// Show the download progress. <br/>
-    /// Default is true. <br/>
+    /// Default is false. <br/>
     /// </summary>
     public bool ShowDownload { get; set; }
     
@@ -26,7 +31,7 @@ public class AndroidInAppUpdatesOptions
     /// This value is used to differentiate between multiple update or request processes within your app. <br/>
     /// To avoid intersection with other libraries or request codes, choose a unique value within your application context.
     /// </summary>
-    public int UpdateRequestId  { get; set; } = 4711;
+    public int RequestCode { get; set; } = DefaultRequestCode;
 
     /// <summary>
     /// This action will be triggered when the app is updated. <br/>
