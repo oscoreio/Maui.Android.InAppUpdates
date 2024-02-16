@@ -4,6 +4,7 @@ using Xamarin.Google.Android.Play.Core.Install.Model;
 using Xamarin.Google.Android.Play.Core.Tasks;
 using Activity = Android.App.Activity;
 
+// ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;
 
 public class AppUpdateSuccessListener(

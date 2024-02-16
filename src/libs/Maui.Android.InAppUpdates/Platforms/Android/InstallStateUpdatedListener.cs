@@ -2,6 +2,7 @@ using Xamarin.Google.Android.Play.Core.Install;
 using Xamarin.Google.Android.Play.Core.Install.Model;
 using Object = Java.Lang.Object;
 
+// ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;
 
 /// <summary>

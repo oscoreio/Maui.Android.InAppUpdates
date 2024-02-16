@@ -1,7 +1,7 @@
-using Android.Views;
 using Android.Widget;
 using Google.Android.Material.Snackbar;
 
+// ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;
 
 public static class DefaultUserInterface

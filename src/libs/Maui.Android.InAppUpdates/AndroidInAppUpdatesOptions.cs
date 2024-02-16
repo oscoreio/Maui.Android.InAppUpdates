@@ -22,38 +22,53 @@ public class AndroidInAppUpdatesOptions
     /// </summary>
     public bool UseFakeAppUpdateManager { get; set; }
     
-#if ANDROID
     /// <summary>
     /// This action will be triggered when the app is updated. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
     public Action AppUpdatedAction { get; set; } = static () =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowShortToast(
             text: "App updated");
+#else
+        {};
+#endif
     
     /// <summary>
     /// This action will be triggered when the update is cancelled. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
     public Action UpdateCancelledAction { get; set; } = static () =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowShortToast(
             text: "In app update cancelled");
+#else
+        {};
+#endif
     
     /// <summary>
     /// This action will be triggered when the update is failed. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
     public Action UpdateFailedAction { get; set; } = static () =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowShortToast(
             text: "In app update failed");
+#else
+        {};
+#endif
     
     /// <summary>
     /// This action will be triggered when the download is failed. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>
     public Action DownloadFailedAction { get; set; } = static () =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowShortToast(
             text: "Update download failed.");
+#else
+        {};
+#endif
     
     /// <summary>
     /// This action will be triggered when downloading the update. <br/>
@@ -61,18 +76,25 @@ public class AndroidInAppUpdatesOptions
     /// Default action will show the toast with english text. <br/>
     /// </summary>
     public Action<double> DownloadingAction { get; set; } = static percents =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowShortToast(
             text: $"Downloaded {percents}%");
+#else
+        {};
+#endif
     
     /// <summary>
     /// This action will be triggered when the update is completed. <br/>
     /// Default action will show the alert dialog to complete the update. <br/>
     /// </summary>
     public Action CompleteUpdateAction { get; set; } = static () =>
+#if ANDROID
         Internal.DefaultUserInterface.ShowSnackbar(
             text: "An update has just been downloaded.",
             actionText: "RESTART",
             clickHandler: static _ => Internal.Handler.AppUpdateManager?.CompleteUpdate());
+#else
+        {};
 #endif
     
     /// <summary>

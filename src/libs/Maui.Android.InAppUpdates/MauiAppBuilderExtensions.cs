@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.LifecycleEvents;
+﻿#if ANDROID
+using Microsoft.Maui.LifecycleEvents;
+#endif
 
 namespace Maui.Android.InAppUpdates;
 
@@ -22,12 +24,10 @@ public static class MauiAppBuilderExtensions
         
 #if ANDROID
         setupAction?.Invoke(Internal.Handler.Options);
-#endif
         
         return builder
             .ConfigureLifecycleEvents(static events =>
             {
-#if ANDROID
                 events.AddAndroid(static android =>
                 {
                     android
@@ -36,7 +36,9 @@ public static class MauiAppBuilderExtensions
                         .OnResume(Internal.Handler.HandleResume)
                         ;
                 });
-#endif
             });
+#else
+        return builder;
+#endif
     }
 }
