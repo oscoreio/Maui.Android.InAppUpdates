@@ -23,6 +23,12 @@ public class AndroidInAppUpdatesOptions
     public bool UseFakeAppUpdateManager { get; set; }
     
     /// <summary>
+    /// This value is used to differentiate between multiple update or request processes within your app. <br/>
+    /// To avoid intersection with other libraries or request codes, choose a unique value within your application context.
+    /// </summary>
+    public int UpdateRequestId  { get; set; } = 4711;
+
+    /// <summary>
     /// This action will be triggered when the app is updated. <br/>
     /// Default action will show the toast with english text. <br/>
     /// </summary>

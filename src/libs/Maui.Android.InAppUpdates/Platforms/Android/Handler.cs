@@ -14,8 +14,6 @@ namespace Maui.Android.InAppUpdates.Internal;
 /// </summary>
 public static class Handler
 {
-    public const int RequestUpdate = 4711;
-    
     /// <summary>
     /// The app update manager.
     /// </summary>
@@ -45,7 +43,7 @@ public static class Handler
         AppUpdateSuccessListener ??= new AppUpdateSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
-            updateRequest: RequestUpdate);
+            updateRequest: Options.UpdateRequestId);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(AppUpdateSuccessListener);
     }
     
@@ -63,7 +61,7 @@ public static class Handler
         ResumeSuccessListener ??= new ResumeSuccessListener(
             appUpdateManager: AppUpdateManager,
             activity: activity,
-            updateRequest: RequestUpdate);
+            updateRequest: Options.UpdateRequestId);
         AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(ResumeSuccessListener);
     }
     
@@ -80,7 +78,7 @@ public static class Handler
         [GeneratedEnum] Result resultCode,
         Intent? data)
     {
-        if (requestCode != RequestUpdate)
+        if (requestCode != Options.UpdateRequestId)
         {
             return;
         }
