@@ -1,7 +1,7 @@
-using Android.App;
+using Android.Gms.Tasks;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
-using Xamarin.Google.Android.Play.Core.Install.Model;
-using Xamarin.Google.Android.Play.Core.Tasks;
+using Xamarin.Google.Android.Play.Core.AppUpdate.Install.Model;
+using Activity = Android.App.Activity;
 
 // ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;
@@ -22,9 +22,9 @@ public class ResumeSuccessListener(
     int updateRequest)
     : Java.Lang.Object, IOnSuccessListener
 {
-    public void OnSuccess(Java.Lang.Object p0)
+    public void OnSuccess(Java.Lang.Object result)
     {
-        if (p0 is not AppUpdateInfo info)
+        if (result is not AppUpdateInfo info)
         {
             return;
         }
@@ -41,8 +41,11 @@ public class ResumeSuccessListener(
             // If an in-app update is already running, resume the update.
             _ = appUpdateManager.StartUpdateFlowForResult(
                 info,
-                AppUpdateType.Immediate,
                 activity,
+                AppUpdateOptions
+                    .NewBuilder(AppUpdateType.Immediate)
+                    .SetAllowAssetPackDeletion(Handler.Options.AllowAssetPackDeletion)
+                    .Build(),
                 updateRequest);
         }
     }

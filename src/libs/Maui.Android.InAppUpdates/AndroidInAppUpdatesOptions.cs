@@ -28,6 +28,17 @@ public class AndroidInAppUpdatesOptions
     public bool UseFakeAppUpdateManager { get; set; }
     
     /// <summary>
+    /// By default, the Android system does not allow the automatic deletion of downloaded asset packs when the app is updated. <br/>
+    /// The default setting (false) is primarily chosen to prevent potential data loss. <br/>
+    /// Android strives to balance efficient storage management with the risk of inadvertently removing assets that might still be needed by the application. <br/>
+    /// By not automatically deleting asset packs upon an app update, the system errs on the side of caution—preserving any downloaded content that might not 
+    /// necessarily be included in the updated version of the app but could still be important for its functionality or user data continuity.  <br/>
+    /// This approach allows developers to manage their app’s assets more deliberately and ensures that users don’t lose access to critical resources 
+    /// due to an automatic cleanup process. <br/>
+    /// </summary>
+    public bool AllowAssetPackDeletion { get; set; }
+    
+    /// <summary>
     /// This value is used to differentiate between multiple update or request processes within your app. <br/>
     /// To avoid intersection with other libraries or request codes, choose a unique value within your application context.
     /// </summary>
