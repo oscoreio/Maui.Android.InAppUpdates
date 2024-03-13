@@ -23,9 +23,19 @@ builder
         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
     });
 ```
+It will display a window when starting an application or resume according to the official guides.  
+You cannot see the popup dialog while developing or if you distribute it manually. 
+As you can [see here](https://developer.android.com/guide/playcore/in-app-review/test), 
+you have to download the app from the Play Store to see the popup. 
+I recommend using Android Play Store's [“Internal App Sharing”](https://play.google.com/console/about/internalappsharing/) feature to test.  
+When flexible updates were available in version 1.0.5, the default behavior was:
+- If priority 1-3 is specified, flexible update will be offered
+- If priority 4-5 is specified, immediate update will be offered
+  
+Currently for version 1.1.0 only immediate update is offered, regardless of priority, but there are plans to return the old behavior when it becomes possible
 
 # Notes
-- Right now the package uses the `Xamarin.Google.Android.Play.Core` dependency for implementation. There is a plan to move to `Xamarin.Google.Android.Play.App.Update` in the future [when the problem with flexible updates is resolved](https://github.com/PatGet/XamarinPlayCoreUpdater/issues/17)
+- Right now the package uses the `Xamarin.Google.Android.Play.App.Update` package, but it's not possible to do flexible updates with it.
 
 # Links
 - https://developer.android.com/guide/playcore/in-app-updates/kotlin-java

@@ -18,9 +18,9 @@ public class AndroidInAppUpdatesOptions
     
     /// <summary>
     /// Sets the priority of the update for immediate updates. <br/>
-    /// Default is 5. <br/>
+    /// Default is >= 4. <br/>
     /// </summary>
-    public int ImmediateUpdatePriority { get; set; } = 5;
+    public int ImmediateUpdatePriority { get; set; } = 4;
     
     /// <summary>
     /// Set this to true to use the fake app update manager. <br/>
