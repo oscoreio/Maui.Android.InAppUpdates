@@ -23,6 +23,7 @@ builder
         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
     });
 ```
+There is no need to specify conditional compilation here, the package provides an empty method for non netx.0-android platforms as a stub to make integration as simple as possible.  
 It will display a window when starting an application or resume according to the official guides.  
 You cannot see the popup dialog while developing or if you distribute it manually. 
 As you can [see here](https://developer.android.com/guide/playcore/in-app-review/test), 
