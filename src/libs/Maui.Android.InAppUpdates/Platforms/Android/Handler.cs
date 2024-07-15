@@ -2,8 +2,8 @@
 using Android.Content;
 using Android.Runtime;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
-using Xamarin.Google.Android.Play.Core.AppUpdate.Install.Model;
 using Xamarin.Google.Android.Play.Core.AppUpdate.Testing;
+using Xamarin.Google.Android.Play.Core.Install.Model;
 using Bundle = Android.OS.Bundle;
 
 // ReSharper disable once CheckNamespace
@@ -44,7 +44,7 @@ public static class Handler
             appUpdateManager: AppUpdateManager,
             activity: activity,
             updateRequest: Options.RequestCode);
-        AppUpdateManager.GetAppUpdateInfo().AddOnSuccessListener(AppUpdateSuccessListener);
+        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(AppUpdateSuccessListener);
     }
     
     /// <summary>
@@ -62,7 +62,7 @@ public static class Handler
             appUpdateManager: AppUpdateManager,
             activity: activity,
             updateRequest: Options.RequestCode);
-        AppUpdateManager.GetAppUpdateInfo().AddOnSuccessListener(ResumeSuccessListener);
+        AppUpdateManager.AppUpdateInfo.AddOnSuccessListener(ResumeSuccessListener);
     }
     
     /// <summary>

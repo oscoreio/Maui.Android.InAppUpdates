@@ -108,7 +108,7 @@ public partial class MainPage : ContentPage
 	
 	private static void AddOnSuccessListener()
 	{
-		FakeAppUpdateManager.GetAppUpdateInfo().AddOnSuccessListener(Internal.Handler.AppUpdateSuccessListener!);
+		FakeAppUpdateManager.AppUpdateInfo.AddOnSuccessListener(Internal.Handler.AppUpdateSuccessListener!);
 	}
 #endif
 }

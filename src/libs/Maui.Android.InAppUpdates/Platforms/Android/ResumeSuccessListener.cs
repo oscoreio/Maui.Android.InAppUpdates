@@ -1,7 +1,7 @@
-using Android.Gms.Tasks;
+using Android.App;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
-using Xamarin.Google.Android.Play.Core.AppUpdate.Install.Model;
-using Activity = Android.App.Activity;
+using Xamarin.Google.Android.Play.Core.Install.Model;
+using Xamarin.Google.Android.Play.Core.Tasks;
 
 // ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;

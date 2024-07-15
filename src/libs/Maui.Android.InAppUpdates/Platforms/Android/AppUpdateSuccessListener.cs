@@ -1,7 +1,7 @@
-using Android.App;
-using Android.Gms.Tasks;
 using Xamarin.Google.Android.Play.Core.AppUpdate;
-using Xamarin.Google.Android.Play.Core.AppUpdate.Install.Model;
+using Xamarin.Google.Android.Play.Core.Install.Model;
+using Xamarin.Google.Android.Play.Core.Tasks;
+using Activity = Android.App.Activity;
 
 // ReSharper disable once CheckNamespace
 namespace Maui.Android.InAppUpdates.Internal;
@@ -12,7 +12,7 @@ public class AppUpdateSuccessListener(
     int updateRequest)
     : Java.Lang.Object, IOnSuccessListener
 {
-    //public InstallStateUpdatedListener? InstallStateUpdatedListener { get; private set; }
+    private InstallStateUpdatedListener? InstallStateUpdatedListener { get; set; }
 
     public void OnSuccess(Java.Lang.Object result)
     {
@@ -24,14 +24,14 @@ public class AppUpdateSuccessListener(
         Handler.Options.DebugAction($"AVAILABLE VERSION CODE {info.AvailableVersionCode()}");
 
         var updateAvailability = info.UpdateAvailability();
-        //var updatePriority = info.UpdatePriority();
+        var updatePriority = info.UpdatePriority();
         var isImmediateUpdatesAllowed = info.IsUpdateTypeAllowed(AppUpdateType.Immediate);
-        //var isFlexibleUpdatesAllowed = info.IsUpdateTypeAllowed(AppUpdateType.Flexible);
+        var isFlexibleUpdatesAllowed = info.IsUpdateTypeAllowed(AppUpdateType.Flexible);
         switch (updateAvailability)
         {
             case UpdateAvailability.UpdateAvailable or
                 UpdateAvailability.DeveloperTriggeredUpdateInProgress
-                when // updatePriority >= Handler.Options.ImmediateUpdatePriority &&
+                when  updatePriority >= Handler.Options.ImmediateUpdatePriority &&
                      isImmediateUpdatesAllowed:
             {
                 _ = appUpdateManager.StartUpdateFlowForResult(
@@ -45,23 +45,23 @@ public class AppUpdateSuccessListener(
                 break;
             }
 
-            // case UpdateAvailability.UpdateAvailable or
-            //     UpdateAvailability.DeveloperTriggeredUpdateInProgress
-            //     when isFlexibleUpdatesAllowed:
-            // {
-            //     InstallStateUpdatedListener ??= new InstallStateUpdatedListener();
-            //     appUpdateManager.RegisterListener(InstallStateUpdatedListener);
-            //
-            //     _ = appUpdateManager.StartUpdateFlowForResult(
-            //         info,
-            //         activity,
-            //         AppUpdateOptions
-            //             .NewBuilder(AppUpdateType.Flexible)
-            //             .SetAllowAssetPackDeletion(Handler.Options.AllowAssetPackDeletion)
-            //             .Build(),
-            //         updateRequest);
-            //     break;
-            // }
+             case UpdateAvailability.UpdateAvailable or
+                 UpdateAvailability.DeveloperTriggeredUpdateInProgress
+                 when isFlexibleUpdatesAllowed:
+             {
+                 InstallStateUpdatedListener ??= new InstallStateUpdatedListener();
+                 appUpdateManager.RegisterListener(InstallStateUpdatedListener);
+            
+                 _ = appUpdateManager.StartUpdateFlowForResult(
+                     info,
+                    activity,
+                     AppUpdateOptions
+                         .NewBuilder(AppUpdateType.Flexible)
+                         .SetAllowAssetPackDeletion(Handler.Options.AllowAssetPackDeletion)
+                         .Build(),
+                     updateRequest);
+                 break;
+             }
 
             case UpdateAvailability.UpdateNotAvailable:
             case UpdateAvailability.Unknown:
