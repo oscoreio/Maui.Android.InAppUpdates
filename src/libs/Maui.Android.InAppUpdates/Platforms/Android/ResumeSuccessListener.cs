@@ -22,7 +22,7 @@ public class ResumeSuccessListener(
     int updateRequest)
     : Java.Lang.Object, IOnSuccessListener
 {
-    public void OnSuccess(Java.Lang.Object result)
+    public void OnSuccess(Java.Lang.Object? result)
     {
         if (result is not AppUpdateInfo info)
         {

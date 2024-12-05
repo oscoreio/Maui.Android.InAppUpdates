@@ -28,12 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\pr.yml = .github\workflows\pr.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "helpers", "helpers", "{E9A82491-47A5-4EFC-9AAA-D7E5382A22DB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrimmingHelper", "src\helpers\TrimmingHelper\TrimmingHelper.csproj", "{F464A23B-B245-4687-BFB3-0DB3FEEAC38B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrimmingHelperApp", "src\helpers\TrimmingHelperApp\TrimmingHelperApp.csproj", "{2073350E-1781-4C08-A24E-CD57F2466B03}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,14 +42,6 @@ Global
 		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F464A23B-B245-4687-BFB3-0DB3FEEAC38B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F464A23B-B245-4687-BFB3-0DB3FEEAC38B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F464A23B-B245-4687-BFB3-0DB3FEEAC38B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F464A23B-B245-4687-BFB3-0DB3FEEAC38B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2073350E-1781-4C08-A24E-CD57F2466B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2073350E-1781-4C08-A24E-CD57F2466B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2073350E-1781-4C08-A24E-CD57F2466B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2073350E-1781-4C08-A24E-CD57F2466B03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,8 +50,6 @@ Global
 		{8E7AE677-AD62-4FFE-ACBF-0F1A947ACDDB} = {928D4422-05CE-4AC2-89B0-31060889AE6A}
 		{542C62E2-8E4A-4FA0-8052-6DCF4A9C7B1A} = {4746EB5B-E37C-40F0-8CA6-7D03185F5370}
 		{8DEF204E-ED5E-45A8-B021-47F6588890F4} = {94FE90BF-FA05-46C6-A207-6E454A236659}
-		{F464A23B-B245-4687-BFB3-0DB3FEEAC38B} = {E9A82491-47A5-4EFC-9AAA-D7E5382A22DB}
-		{2073350E-1781-4C08-A24E-CD57F2466B03} = {E9A82491-47A5-4EFC-9AAA-D7E5382A22DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1493AEE4-9211-46E9-BFE6-8F629EAC5693}

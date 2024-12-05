@@ -21,8 +21,8 @@ public partial class MainPage : ContentPage
 	private void SetUpdateAvailableWithPriorityOf5()
 	{
 #if ANDROID
-		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 5);
 		FakeAppUpdateManager.SetUpdateAvailable(availableVersionCode: _availableVersionCode++);
+		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 5);
 		AddOnSuccessListener();
 #endif
 	}
@@ -31,8 +31,8 @@ public partial class MainPage : ContentPage
 	private void SetUpdateAvailableWithPriorityOf3()
 	{
 #if ANDROID
-		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 3);
 		FakeAppUpdateManager.SetUpdateAvailable(availableVersionCode: _availableVersionCode++);
+		FakeAppUpdateManager.SetUpdatePriority(updatePriority: 3);
 		AddOnSuccessListener();
 #endif
 	}
@@ -108,7 +108,7 @@ public partial class MainPage : ContentPage
 	
 	private static void AddOnSuccessListener()
 	{
-		FakeAppUpdateManager.GetAppUpdateInfo().AddOnSuccessListener(Internal.Handler.AppUpdateSuccessListener!);
+		FakeAppUpdateManager.GetAppUpdateInfo()?.AddOnSuccessListener(Internal.Handler.AppUpdateSuccessListener!);
 	}
 #endif
 }
