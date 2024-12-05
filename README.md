@@ -10,7 +10,7 @@ NuGet package that implementing Android In-App Updates for MAUI with debugging c
 # Usage
 - Add NuGet package to your project:
 ```xml
-<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.0.0" />
+<PackageReference Include="Oscore.Maui.Android.InAppUpdates" Version="1.2.0" />
 ```
 - Add the following to your `MauiProgram.cs` `CreateMauiApp` method:
 ```diff
@@ -23,20 +23,19 @@ builder
         fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
     });
 ```
+
+## Notes
+The default behavior:
+- If priority 1-3 is specified, flexible update will be offered
+- If priority 4-5 is specified, immediate update will be offered
+
 There is no need to specify conditional compilation here, the package provides an empty method for non netx.0-android platforms as a stub to make integration as simple as possible.  
 It will display a window when starting an application or resume according to the official guides.  
 You cannot see the popup dialog while developing or if you distribute it manually. 
 As you can [see here](https://developer.android.com/guide/playcore/in-app-review/test), 
 you have to download the app from the Play Store to see the popup. 
 I recommend using Android Play Store's [“Internal App Sharing”](https://play.google.com/console/about/internalappsharing/) feature to test.  
-When flexible updates were available in version 1.0.5, the default behavior was:
-- If priority 1-3 is specified, flexible update will be offered
-- If priority 4-5 is specified, immediate update will be offered
-  
-Currently for version 1.1.0 only immediate update is offered, regardless of priority, but there are plans to return the old behavior when it becomes possible
 
-# Notes
-- Right now the package uses the `Xamarin.Google.Android.Play.App.Update` package, but it's not possible to do flexible updates with it.
 
 # Links
 - https://developer.android.com/guide/playcore/in-app-updates/kotlin-java
