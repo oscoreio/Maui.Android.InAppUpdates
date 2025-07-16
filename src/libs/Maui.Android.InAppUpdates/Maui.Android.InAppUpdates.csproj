@@ -19,7 +19,7 @@
     <TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
   </PropertyGroup>
-  
+
   <PropertyGroup Label="NuGet">
     <PackageId>Oscore.$(AssemblyName)</PackageId>
     <Description>NuGet package that implementing Android In-App Updates for MAUI with debugging capabilities.</Description>
@@ -27,14 +27,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'" Label="Android In-app Updates">
-    <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.10.1.1" />
-    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.5.0.1" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.6.1" />
-    <PackageReference Include="Xamarin.Google.Android.Play.App.Update.Ktx" Version="2.1.0.14" />
+    <PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.10.1.2" />
+    <PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.5.0.2" />
+    <PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.8" />
+    <PackageReference Include="Xamarin.Google.Android.Play.App.Update.Ktx" Version="2.1.0.15" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS')) != true AND $(TargetFramework.StartsWith('net9.0-ios')) != true AND $(TargetFramework.StartsWith('net9.0-maccatalyst')) != true ">
