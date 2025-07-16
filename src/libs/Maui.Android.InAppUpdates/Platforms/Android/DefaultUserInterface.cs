@@ -37,7 +37,7 @@ public static class DefaultUserInterface
     /// </summary>
     /// <param name="text">The text to display on the snackbar.</param>
     /// <param name="actionText">The text for the action button.</param>
-    /// <param name="clickHandler">The handler for the action button. Can be null if no action is needed.</param>
+    /// <param name="clickHandler">The handler for the action button.</param>
     public static void ShowSnackbar(
         string text,
         string actionText,
