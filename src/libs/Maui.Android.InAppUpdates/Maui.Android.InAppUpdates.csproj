@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst;net9.0-windows10.0.19041.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net10.0-android;net10.0-ios;net10.0-maccatalyst;net10.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks>
+<!--    <TargetFrameworks>$(TargetFrameworks);net10.0-tizen</TargetFrameworks>-->
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <LangVersion>preview</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseMaui>true</UseMaui>
     <NoWarn>$(NoWarn);CA1031;CA2000</NoWarn>
-    <MauiVersion>9.0.90</MauiVersion>
+    <MauiVersion>10.0.10</MauiVersion>
 
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">12.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
@@ -30,11 +30,7 @@
 	  <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'" Label="Android In-app Updates">
-    <PackageReference Include="Xamarin.Google.Android.Play.App.Update.Ktx" Version="2.1.0.15" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS')) != true AND $(TargetFramework.StartsWith('net9.0-ios')) != true AND $(TargetFramework.StartsWith('net9.0-maccatalyst')) != true ">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS')) != true AND $(TargetFramework.StartsWith('net10.0-ios')) != true AND $(TargetFramework.StartsWith('net10.0-maccatalyst')) != true ">
     <Compile Remove="**\**\*.ios.cs" />
     <None Include="**\**\*.ios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\ios\**\*.cs" />
@@ -46,13 +42,13 @@
     <Compile Remove="**\macos\**\*.cs" />
     <None Include="**\macos\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.Mac')) != true AND $(TargetFramework.StartsWith('Xamarin.iOS')) != true AND $(TargetFramework.StartsWith('net9.0-ios')) != true AND $(TargetFramework.StartsWith('net9.0-maccatalyst')) != true">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.Mac')) != true AND $(TargetFramework.StartsWith('Xamarin.iOS')) != true AND $(TargetFramework.StartsWith('net10.0-ios')) != true AND $(TargetFramework.StartsWith('net10.0-maccatalyst')) != true">
     <Compile Remove="**\*.macios.cs" />
     <None Include="**\*.macios.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\macios\**\*.cs" />
     <None Include="**\macios\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid')) != true AND $(TargetFramework.StartsWith('net9.0-android')) != true ">
+  <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid')) != true AND $(TargetFramework.StartsWith('net10.0-android')) != true ">
     <Compile Remove="**\**\*.android.cs" />
     <None Include="**\**\*.android.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\android\**\*.cs" />
@@ -70,11 +66,14 @@
     <Compile Remove="**\tizen\**\*.cs" />
     <None Include="**\tizen\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
-  <ItemGroup Condition="!($(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('.0')) == true AND $(TargetFramework.Contains('-')) != true)"> <!-- e.g net6.0 or net9.0 -->
+  <ItemGroup Condition="!($(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('.0')) == true AND $(TargetFramework.Contains('-')) != true)"> <!-- e.g net6.0 or net10.0 -->
     <Compile Remove="**\*.net.cs" />
     <None Include="**\*.net.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <Compile Remove="**\net\**\*.cs" />
     <None Include="**\net\**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+    <PackageReference Include="Xamarin.Google.Android.Play.App.Update.Ktx" Version="2.1.0.16" />
   </ItemGroup>
 
 </Project>
